@@ -1,0 +1,39 @@
+<div class="p-4">
+    <form [formGroup]="catsGroup" class="flex justify-content-between px-2">
+        <mat-form-field appearance="fill">
+            <mat-label>Breed</mat-label>
+            <mat-select formControlName="catsBreed">
+                <mat-option [value]="''">All</mat-option>
+              <mat-option *ngFor="let option of breedOptions | async" [value]="option.id">
+                {{ option.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Breed</mat-label>
+            <mat-select formControlName="catsCategory">
+                <mat-option [value]="''">All</mat-option>
+              <mat-option *ngFor="let option of categoryOptions | async" [value]="option.id">
+                {{ option.name | titlecase }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Visible items count</mat-label>
+            <mat-select formControlName="catsCount">
+              <mat-option *ngFor="let limit of catsLimit " [value]="limit">
+                {{ limit }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+    </form>
+    
+    
+      <div class="flex flex-wrap justify-content-between">
+        <ng-container *ngFor="let image of cats | async" >
+            <app-cat-item [cat]="image"></app-cat-item>
+        </ng-container>
+      </div>
+</div>
+
